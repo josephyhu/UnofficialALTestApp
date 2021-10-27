@@ -1,5 +1,5 @@
 # UnofficialALTestApp
-Display selected user's anime or manga list.
+Display logged in user's anime or manga list.
 
 Steps:
 1. Open index.html in the browser and log in using the link.
