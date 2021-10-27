@@ -1,10 +1,18 @@
-let accessToken = '{token}';
+let accessToken = '';
 let url = 'https://graphql.anilist.co';
+let login = document.querySelector('#login')
+let main = document.querySelector('main');
 let submitBtn = document.querySelector('#submit');
 let resetBtn = document.querySelector('#reset');
 let h2 = document.querySelector('h2');
 let h3 = document.querySelector('h3');
 let ul = document.querySelector('ul');
+
+if (!accessToken) {
+    main.innerHTML = '';
+} else {
+    login.innerHTML = '';
+}
 
 submitBtn.addEventListener('click', e => {
     e.preventDefault()
