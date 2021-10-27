@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Unofficial Anilist Test App</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header>
+    <h1>Unofficial Anilist Test App</h1>
+</header>
+<main>
+    <a href='https://anilist.co/api/v2/oauth/authorize?client_id=6802&redirect_uri=https://anilist.co/api/v2/oauth/pin&response_type=code'>Login with AniList</a>
+    <form action="index.html" method="post">
+        <label for="name">Username<span class="required">*</span></label>
+        <input type="text" id="name" required><br>
+        <label>Type of Media<span class="required">*</span></label><br>
+        <input type="radio" id="anime" name="type" value="ANIME" required>
+        <label for="anime">Anime</label>
+        <input type="radio" id="manga" name="type" value="MANGA">
+        <label for="manga">Manga</label><br>
+        <label for="status">Status<span class="required">*</span></label>
+        <select id="status" required>
+            <option value="CURRENT">Current</option>
+            <option value="PLANNING">Planning</option>
+            <option value="COMPLETED">Completed</option>
+            <option value="DROPPED">Dropped</option>
+            <option value="PAUSED">Paused</option>
+            <option value="REPEATING">Repeating</option>
+        </select><br>
+        <button type="submit" id="submit">Submit</button>
+        <button type="reset" id="reset">Reset</button>
+    </form>
+    <section>
+        <h2></h2>
+        <h3></h3>
+        <ul></ul>
+    </section>
+</main>
+<script src="js/script.js"></script>
+</body>
+</html>

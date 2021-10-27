@@ -1,0 +1,13 @@
+body {
+    background-color: black;
+    color: white;
+}
+.required {
+    color: red;
+}
+a {
+    color: yellow;
+}
+a:hover, a:focus {
+    opacity: 50%;
+}
