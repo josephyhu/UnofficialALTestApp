@@ -1,4 +1,4 @@
-let accessToken = '';
+let accessToken = '{token}';
 let url = 'https://graphql.anilist.co';
 let login = document.querySelector('#login')
 let main = document.querySelector('main');
@@ -7,22 +7,40 @@ let resetBtn = document.querySelector('#reset');
 let h2 = document.querySelector('h2');
 let h3 = document.querySelector('h3');
 let ul = document.querySelector('ul');
+let id;
 
-if (!accessToken) {
-    main.innerHTML = '';
-} else {
-    login.innerHTML = '';
-}
+let getAuthenticatedUserQuery = `
+    query {
+        Viewer {
+            id
+        }
+    }`
+
+fetch(url, {
+    method: 'POST',
+    headers: {
+        "authorization": "Bearer " + accessToken,
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+    },
+    body: JSON.stringify({
+        query: getAuthenticatedUserQuery
+    }),
+})
+    .then(checkStatus)
+    .then(res => res.json())
+    .then(data => getAuthenticatedUser(data.data.Viewer.id))
+    .catch(err => console.log('You have to be authenticated to use this app.', err))
 
 submitBtn.addEventListener('click', e => {
     e.preventDefault()
-    let name = document.querySelector('#name').value;
+    let userId = id;
     let type = document.querySelector('input[name="type"]:checked').value;
     let status = document.querySelector('#status').value;
     let getUserMediaTitles = `
-        query ($name: String, $type: MediaType, $status: MediaListStatus) {
+        query ($userId: Int, $type: MediaType, $status: MediaListStatus) {
             Page {
-                mediaList (userName: $name, type: $type, status: $status) {
+                mediaList (userId: $userId, type: $type, status: $status) {
                     media {
                         id,
                         title {
@@ -34,14 +52,13 @@ submitBtn.addEventListener('click', e => {
             }
         }`
     let variables = {
-        name: name,
+        userId: userId,
         type: type,
         status: status
     };
     fetch(url, {
         method: "POST",
         headers: {
-            "authorization": "Bearer " + accessToken,
             "Content-Type": "application/json",
             "Accept": "application/json"
         },
@@ -77,8 +94,14 @@ resetBtn.addEventListener('click', () => {
 
 function checkStatus(res) {
     if (res.ok) {
+        login.innerHTML = '';
         return Promise.resolve(res);
     } else {
+        main.innerHTML = '';
         return Promise.reject(new Error(res.statusText));
     }
+}
+
+function getAuthenticatedUser(data) {
+    id = data;
 }
