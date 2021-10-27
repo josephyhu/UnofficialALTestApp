@@ -1,6 +1,8 @@
 # UnofficialALTestApp
 Display logged in user's anime or manga list.
 
+**Note: You will need an [Anilist](https://anilist.co/home) account to use this app.**
+
 Steps:
 1. Open index.html in the browser and log in using the link.
 2. Paste the code provided in place of `{code}` on js/authorization.js.
